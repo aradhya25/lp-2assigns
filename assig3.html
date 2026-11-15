@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registeration form</title>
+  </head>
+  <style>
+    .dark {
+      background-color: black;
+      color: white;
+    }
+  </style>
+  <body>
+    <h1>Registeration Form</h1>
+    <form id="myForm">
+      Name:<input type="text" id="name" placeholder="Enter Name" /> Email:<input
+        type="email"
+        id="email"
+        placeholder="Enter Email"
+      />
+      Password:<input
+        type="password"
+        id="password"
+        placeholder="Enter Password"
+      />
+      Age:<input type="number" id="age" placeholder="Enter Age" />
+      <p id="error" style="color: red"></p>
+      <button type="submit">Register</button>
+    </form>
+    <br /><br />
+    <h3 id="message"></h3>
+    <button onclick="ChangeTheme()">Change Theme</button>
+    <button onclick="showText()">Show/Hide text</button>
+    <button onclick="formatText()">ChangeText</button>
+    <p id="text">Welcome to javascript</p>
+  </body>
+  <script>
+    document.getElementById("myForm").onsubmit = function (e) {
+      e.preventDefault();
+      let name = document.getElementById("name").value;
+      let email = document.getElementById("email").value;
+      let password = document.getElementById("password").value;
+      let age = document.getElementById("age").value;
+
+      if (name == "") {
+        error.innerHTML = "Please Enter Name";
+      } else if (!email.includes("@")) {
+        error.innerHTML = "email is invalid";
+      } else if (password.length < 6) {
+        error.innerHTML = "Invalid password";
+      } else if (age < 18 || age == "") {
+        error.innerHTML = "Invalid age";
+      } else {
+        error.innerHTML = "";
+        message.innerHTML = "Registeration done successfully";
+      }
+    };
+    function ChangeTheme() {
+      document.body.classList.toggle("dark");
+    }
+    function showText() {
+      let p = document.getElementById("text");
+      if (p.style.display == "none") {
+        p.style.display = "block";
+      } else {
+        p.style.display = "none";
+      }
+    }
+    function formatText() {
+      text.style.color = "green";
+    }
+  </script>
+</html>
