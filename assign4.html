@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Events Explorer</title>
+  </head>
+  <body>
+    <h1>Events Explorer</h1>
+    Search: <input type="text" id="search" />
+    Category:
+    <select id="category">
+      <option>All</option>
+      <option>Technical</option>
+      <option>Cultural</option>
+      <option>Sports</option>
+    </select>
+    <br /><br />
+    <button onclick="show()">Search events</button>
+    <div id="events"></div>
+  </body>
+  <script>
+    let events = [
+      { name: "Coding", category: "Technical" },
+      { name: "Dance", category: "Cultural" },
+      { name: "Cricket", category: "Sports" },
+      { name: "Hackathon", category: "Technical" },
+    ];
+
+    function show() {
+      let s = document.getElementById("search").value.toLowerCase();
+      let c = document.getElementById("category").value;
+      let result = "";
+      for (let i = 0; i < events.length; i++) {
+        if (
+          events[i].name.toLowerCase().includes(s) &&
+          (c == "All" || events[i].category == c)
+        ) {
+          result += "<div class='card'>";
+          result += "<h3>" + events[i].name + "</h3>";
+          result += "<h3>" + events[i].category + "</h3>";
+          result += "</div>";
+        }
+      }
+      if (result == "") {
+        result = "No event found";
+      }
+      document.getElementById("events").innerHTML = result;
+    }
+    show();
+  </script>
+</html>
