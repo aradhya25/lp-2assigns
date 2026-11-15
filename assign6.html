@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+  </head>
+  <body>
+    <h1>Admin Login</h1>
+    <input type="text" id="user" placeholder="Username" /> <br />
+    <input type="password" id="password" placeholder="Password" /> <br />
+    <button onclick="login()">Login</button>
+    <div id="dashboard" style="display: none">
+      <h1>Admin Dashboard</h1>
+      <h2>Manage Events</h2>
+      <input type="text" id="eventName" placeholder="EventName" />
+      <input type="date" id="date" placeholder="Date" />
+      <input type="text" id="venue" placeholder="Venue" />
+      <button onclick="add()">Add Events</button>
+
+      <h3>Event List</h3>
+      <div id="result"></div>
+      <button onclick="logout()">Logout</button>
+    </div>
+    <script>
+      var events = [];
+      function login() {
+        if (user.value == "admin" && password.value == "1234") {
+          dashboard.style.display = "block";
+        } else {
+          alert("Invalid credentials");
+        }
+      }
+
+      function add() {
+        var event = {
+          name: eventName.value,
+          date: date.value,
+          venue: venue.value,
+        };
+        if (event.name == "" || event.date == "" || event.venue == "") {
+          alert("Missing event details");
+        }
+        events.push(event);
+        display();
+        eventName.value = "";
+        date.value = "";
+        venue.value = "";
+      }
+
+      function display() {
+        var data = "";
+        for (var i = 0; i < events.length; i++) {
+          data += events[i].name + " ";
+          data += events[i].date + " ";
+          data += events[i].venue + " ";
+
+          data += "<button onclick='edit(" + i + ")'>Edit</button>";
+          data += "<button onclick='del(" + i + ")'>Delete</button>";
+          data += "<br><br>";
+        }
+        result.innerHTML = data;
+      }
+      function edit(i) {
+        eventName.value = events[i].name;
+        date.value = events[i].date;
+        venue.value = events[i].venue;
+        events.splice(i, 1);
+        display();
+      }
+      function del(i) {
+        events.splice(i, 1);
+        display();
+      }
+      function logout() {
+        location.reload();
+      }
+    </script>
+  </body>
+</html>
